@@ -14,6 +14,7 @@ define('OILPRICE',10);
 define('SPARKPRICE',4);
 
 echo "<p> Order processed at".date ('H:i,Y-m-d ')."</p>\n";
+echo $_SERVER['DOCUMENT_ROOT'];
 $tireqty = $_POST['tireqty'];
 $oilqty = $_POST['oilqty'];
 $sparkqty = $_POST['sparkqty'];
