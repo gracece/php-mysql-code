@@ -1,1 +1,3 @@
 2012-12-14,20:17	4tires 	4oil	4sparks	501.6dollars	ggg
+2012-12-14,20:43	9 tires 	7 oil 	98 sparks 	1498.2 dollars	 USA
+2012-12-14,21:17	3 tires 	5 oil 	4 sparks 	402.6 dollars	 gd

@@ -20,7 +20,6 @@ $address = $_POST['address'];
 $totalqty = $tireqty +$sparkqty + $oilqty;
 $totalamount = 0.00;
 $DOCUMENT_ROOT = $_SERVER['DOCUMENT_ROOT'];
-$fp = fopen('order.txt','ab');
 $date = date('Y-m-d,H:i');
 
 echo "<p> Order processed at".$date."</p>\n";
@@ -66,8 +65,17 @@ else
   echo "total including tax:".number_format($totalamount,2)."</br>";
 }
 
+$fp = @fopen('order.txt','ab');
+if(!$fp)
+{
+echo "failed!";
+exit;
+}
+
+flock ($fp,LOCK_EX);
 $outputString = $date."\t".$tireqty." tires \t".$oilqty." oil \t".$sparkqty." sparks "."\t".$totalamount." dollars\t ".$address."\n";
 fwrite($fp,$outputString,strlen($outputString));
+flock($fp,LOCK_UN);
 fclose($fp);
   
 echo " <p>Order writtern!</p>  "
