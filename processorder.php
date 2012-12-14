@@ -12,16 +12,18 @@
 define('TRICEPRICE',100);
 define('OILPRICE',10);
 define('SPARKPRICE',4);
-
-echo "<p> Order processed at".date ('H:i,Y-m-d ')."</p>\n";
-echo $_SERVER['DOCUMENT_ROOT'];
 $tireqty = $_POST['tireqty'];
 $oilqty = $_POST['oilqty'];
 $sparkqty = $_POST['sparkqty'];
 $find = $_POST['find'];
+$address = $_POST['address'];
 $totalqty = $tireqty +$sparkqty + $oilqty;
 $totalamount = 0.00;
+$DOCUMENT_ROOT = $_SERVER['DOCUMENT_ROOT'];
+$fp = fopen('order.txt','ab');
+$date = date('Y-m-d,H:i');
 
+echo "<p> Order processed at".$date."</p>\n";
 switch($find)
 {
 case  "regular":
@@ -63,6 +65,15 @@ else
   $totalamount *= (1+$taxrate);
   echo "total including tax:".number_format($totalamount,2)."</br>";
 }
+
+$outputString = $date."\t".$tireqty." tires \t".$oilqty." oil \t".$sparkqty." sparks "."\t".$totalamount." dollars\t ".$address."\n";
+fwrite($fp,$outputString,strlen($outputString));
+fclose($fp);
+  
+echo " <p>Order writtern!</p>  "
+
+
+
 
 ?>
   </body>
